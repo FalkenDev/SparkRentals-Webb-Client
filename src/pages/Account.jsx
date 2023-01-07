@@ -1,6 +1,7 @@
 import React from "react";
 import { Profile, History, Prepaid } from "../components";
 import profile from "../models/profile.js"
+import auth from "../models/auth.js"
 import { useState, useEffect } from "react";
 const Account = () => {
   const [userData, setUserData] = useState({});
@@ -10,8 +11,9 @@ const Account = () => {
   }, []);
 
   async function fetchData() {
-    const res = await profile.getUser();
-    console.log(res);
+    const resGoogle = await auth.getUser()
+    const res = await profile.getUserInformation(resGoogle._id);
+    console.log("res",res);
     setUserData(res);
   }
   return (
