@@ -17,7 +17,7 @@ const auth = {
             }).catch(function () {
                 return false;
             })
-            console.log("after fetch in get user", response.data);
+            console.log("GOOGLE AUTH FETCH:", response.data);
             storage.storeToken(response.data.accessToken);
             return response.data;
             },

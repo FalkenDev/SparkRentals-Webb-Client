@@ -11,6 +11,7 @@ const profile = {
                 },
                 }
             );
+            console.log("Getting user data with Google Token");
             return response.json();
         } else {
             const tokenObj = storage.readToken();
@@ -22,7 +23,7 @@ const profile = {
                 },
             }
             );
-            console.log("user data");
+            console.log("Getting user data with x-acces-token");
             return response.json();
         }
     }

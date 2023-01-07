@@ -6,20 +6,23 @@ import { useState, useEffect } from "react";
 import { useStateContext } from "../contexts/ContextProvider";
 const Account = () => {
   const [userData, setUserData] = useState({});
-  const { isGoogleAcc } = useStateContext();
+  const { isGoogleAcc, isLoggedIn } = useStateContext();
 
   useEffect(() => {
     fetchData();
   }, []);
 
   async function fetchData() {
-    console.log("hej")
+    console.log("-----------ACCOUNT----------");
+    console.log("isGoogleAcc",isGoogleAcc)
+    console.log("isLoggedIn",isLoggedIn)
     const resGoogle = await auth.getUser()
     console.log("resGoogle._id",resGoogle._id)
     console.log("isGoogleAcc",isGoogleAcc)
     const res = await profile.getUserInformation(resGoogle._id, isGoogleAcc);
-    console.log("res-----------------------",res);
+    console.log("Res User data",res);
     setUserData(res);
+    console.log("----------------------------");
   }
   return (
     <>
