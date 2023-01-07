@@ -3,17 +3,22 @@ import { Profile, History, Prepaid } from "../components";
 import profile from "../models/profile.js"
 import auth from "../models/auth.js"
 import { useState, useEffect } from "react";
+import { useStateContext } from "../contexts/ContextProvider";
 const Account = () => {
   const [userData, setUserData] = useState({});
+  const { isGoogleAcc } = useStateContext();
 
   useEffect(() => {
     fetchData();
   }, []);
 
   async function fetchData() {
+    console.log("hej")
     const resGoogle = await auth.getUser()
-    const res = await profile.getUserInformation(resGoogle._id);
-    console.log("res",res);
+    console.log("resGoogle._id",resGoogle._id)
+    console.log("isGoogleAcc",isGoogleAcc)
+    const res = await profile.getUserInformation(resGoogle._id, isGoogleAcc);
+    console.log("res-----------------------",res);
     setUserData(res);
   }
   return (

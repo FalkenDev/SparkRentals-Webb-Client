@@ -18,6 +18,7 @@ const auth = {
                 return false;
             })
             console.log("after fetch in get user", response.data);
+            storage.storeToken(response.data.accessToken);
             return response.data;
             },
     

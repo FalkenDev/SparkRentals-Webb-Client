@@ -6,20 +6,24 @@ import { Home, LoginFailure, LoginSuccess, Logout, Account } from "./pages";
 import { useStateContext } from "./contexts/ContextProvider";
 const App = () => {
   const [displayForm, setDisplayForm] = useState(false);
-  const { setIsLoggedIn } = useStateContext();
+  const { setIsLoggedIn, setIsGoogleAcc } = useStateContext();
   useEffect(() => {
     async function checkloggedIn() {
-      const res = await auth.loggedIn()
+      const res = auth.loggedIn()
       const resGoogle = await auth.getUser()
-      console.log(resGoogle);
+      console.log("resGoogle-------------------->", resGoogle);
+      console.log("res1-------------------->", res);
       if(res) {
         setIsLoggedIn(true);
-      } else if(resGoogle) {
+      } 
+      if(resGoogle) {
+        console.log("resGoogle Ska SÄTTAS TILL TRUE");
+        setIsGoogleAcc(true);
         setIsLoggedIn(true);
       }
     }
     checkloggedIn();
-  });
+  },[]);
 
   const overlay = () => {
     let state = { click: "auto", backdrop: "blur(0px)" };

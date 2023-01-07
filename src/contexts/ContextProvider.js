@@ -7,12 +7,15 @@ const StateContext = createContext();
 
 export const ContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isGoogleAcc, setIsGoogleAcc] = useState(false);
 
   return (
     <StateContext.Provider
       value={{
         setIsLoggedIn,
         isLoggedIn,
+        isGoogleAcc,
+        setIsGoogleAcc
       }}
     >
       {children}
