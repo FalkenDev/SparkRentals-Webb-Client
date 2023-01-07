@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Footer, Header, LoginForm } from "./components";
+import auth from "./models/auth.js"
 import { Home, LoginFailure, LoginSuccess, Logout, Account } from "./pages";
+import { useStateContext } from "./contexts/ContextProvider";
 const App = () => {
   const [displayForm, setDisplayForm] = useState(false);
+  const { setIsLoggedIn } = useStateContext();
+  useEffect(() => {
+    async function checkloggedIn() {
+      const res = await auth.loggedIn()
+      const resGoogle = await auth.getUser()
+      console.log(resGoogle);
+      if(res) {
+        setIsLoggedIn(true);
+      } else if(resGoogle) {
+        setIsLoggedIn(true);
+      }
+    }
+    checkloggedIn();
+  });
 
   const overlay = () => {
     let state = { click: "auto", backdrop: "blur(0px)" };

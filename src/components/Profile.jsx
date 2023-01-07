@@ -1,17 +1,6 @@
 const Profile = ({ userData }) => {
-  const userInfo = () => {
-    return userData.arrayOverview
-      .map((item, index) => {
-        return (
-          <tr key={index} className="border-b text-base border-gray-400">
-            <td className="py-3 px-6">{index}</td>
-            <td className="py-3 px-6">{item.name}</td>
-          </tr>
-        );
-      });
-  };
-
-  if (!userData.arrayOverview) {
+  console.log(userData);
+  if (!userData) {
     return <div>Loading</div>;
   }
 
@@ -21,10 +10,11 @@ const Profile = ({ userData }) => {
         <thead className=" bg-sidebarBlue text-gray-200">
           <tr>
             <th className="font-normal px-6">ID</th>
-            <th className="font-normal px-6">Name:</th>
+            <th className="font-normal px-6">First Name: {userData["firstName"]}</th>
+            <th className="font-normal px-6">Last Name: {userData["lastName"]}</th>
+            <th className="font-normal px-6">Email: {userData["email"]}</th>
           </tr>
         </thead>
-        <tbody>{userInfo()}</tbody>
       </table>
     </>
   );
