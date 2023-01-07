@@ -1,10 +1,15 @@
 import React from "react";
 import LogoBlack from "../assets/LogoBlack.svg";
 import { useStateContext } from "../contexts/ContextProvider";
+import auth from "../models/auth.js"
 
 const Header = ({ setDisplayForm }) => {
-  const { isLoggedIn } = useStateContext();
+  const { isLoggedIn, setIsLoggedIn } = useStateContext();
   console.log(isLoggedIn);
+  const logout = async () => {
+    await auth.googleLogout();
+    setIsLoggedIn(false);
+  }
   return (
     <div className="flex w-screen flex-row justify-between">
       <div className="p-2">
@@ -18,7 +23,9 @@ const Header = ({ setDisplayForm }) => {
         :(<></>)
         }
         {isLoggedIn
-        ?(<button onClick={event =>  window.location.href='/logout'} className="px-3 py-1 m-4 border border-DarkBlue rounded-lg
+        ?(<button onClick={() => {
+          logout();
+        }} className="px-3 py-1 m-4 border border-DarkBlue rounded-lg
         hover:bg-DarkBlue hover:text-white transition-all">Logout</button>)
         :(<button
           onClick={() => {
