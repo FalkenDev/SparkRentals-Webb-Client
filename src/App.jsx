@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Footer, Header, LoginForm } from "./components";
-import { Home } from "./pages";
+import { Home, LoginFailure, LoginSuccess, Logout, Account } from "./pages";
 const App = () => {
   const [displayForm, setDisplayForm] = useState(false);
 
@@ -36,6 +36,10 @@ const App = () => {
         <div className="mb-auto">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login/google/failure" element={<LoginFailure />} />
+            <Route path="/login/google/success" element={<LoginSuccess />}/>
+            <Route path="/logout/google" element={<Logout />}/>
+            <Route path="/account" element={<Account />}/>
           </Routes>
         </div>
         <Footer />
