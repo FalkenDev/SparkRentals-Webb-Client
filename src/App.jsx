@@ -6,20 +6,26 @@ import { Home, LoginFailure, LoginSuccess, Logout, Account } from "./pages";
 import { useStateContext } from "./contexts/ContextProvider";
 const App = () => {
   const [displayForm, setDisplayForm] = useState(false);
-  const { setIsLoggedIn } = useStateContext();
+  const { isLoggedIn, setIsLoggedIn, isGoogleAcc, setIsGoogleAcc } = useStateContext();
   useEffect(() => {
     async function checkloggedIn() {
-      const res = await auth.loggedIn()
+      const res = auth.loggedIn()
       const resGoogle = await auth.getUser()
-      console.log(resGoogle);
+      console.log("------------- APP.TSX -------------")
       if(res) {
         setIsLoggedIn(true);
-      } else if(resGoogle) {
+      } 
+      if(resGoogle) {
+        console.log("resGoogle Ska SÄTTAS TILL TRUE");
+        setIsGoogleAcc(true);
         setIsLoggedIn(true);
       }
+      console.log("isGoogleAcc",isGoogleAcc)
+      console.log("isLoggedIn",isLoggedIn)
+      console.log("-----------------------------------")
     }
     checkloggedIn();
-  });
+  },[]);
 
   const overlay = () => {
     let state = { click: "auto", backdrop: "blur(0px)" };
@@ -55,7 +61,9 @@ const App = () => {
             <Route path="/login/google/failure" element={<LoginFailure />} />
             <Route path="/login/google/success" element={<LoginSuccess />}/>
             <Route path="/logout/google" element={<Logout />}/>
-            <Route path="/account" element={<Account />}/>
+            {isGoogleAcc ? (
+              <Route path="/account" element={<Account />}/>
+            ) : null}
           </Routes>
         </div>
         <Footer />

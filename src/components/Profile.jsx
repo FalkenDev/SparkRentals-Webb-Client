@@ -1,5 +1,5 @@
 const Profile = ({ userData }) => {
-  console.log(userData);
+  console.log("userData1", userData);
   if (!userData) {
     return <div>Loading</div>;
   }
