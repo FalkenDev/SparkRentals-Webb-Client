@@ -9,6 +9,7 @@ export const ContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isGoogleAcc, setIsGoogleAcc] = useState(false);
   const [isServerAcc, setIsServerAcc] = useState(false);
+  const [serverProfileId, setServerProfileId] = useState();
 
   return (
     <StateContext.Provider
@@ -18,7 +19,9 @@ export const ContextProvider = ({ children }) => {
         isGoogleAcc,
         setIsGoogleAcc,
         isServerAcc,
-        setIsServerAcc
+        setIsServerAcc,
+        serverProfileId,
+        setServerProfileId,
       }}
     >
       {children}

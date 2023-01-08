@@ -1,31 +1,45 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Footer, Header, LoginForm } from "./components";
-import auth from "./models/auth.js"
+import auth from "./models/auth.js";
 import { Home, LoginFailure, LoginSuccess, Logout, Account } from "./pages";
 import { useStateContext } from "./contexts/ContextProvider";
 const App = () => {
   const [displayForm, setDisplayForm] = useState(false);
-  const { isLoggedIn, setIsLoggedIn, isGoogleAcc, setIsGoogleAcc } = useStateContext();
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    isGoogleAcc,
+    setIsGoogleAcc,
+    setIsServerAcc,
+    isServerAcc,
+  } = useStateContext();
+
   useEffect(() => {
     async function checkloggedIn() {
-      const res = auth.loggedIn()
-      const resGoogle = await auth.getUser()
-      console.log("------------- APP.TSX -------------")
-      if(res) {
+      const res = auth.loggedIn("JWT");
+      console.log("------------- APP.JSX -------------");
+      if (res) {
+        setIsServerAcc(true);
         setIsLoggedIn(true);
-      } 
-      if(resGoogle) {
+      }
+      console.log("-----------------------------------");
+    }
+    checkloggedIn();
+  }, []);
+
+  useEffect(() => {
+    async function checkloggedIn() {
+      const resGoogle = await auth.getUser();
+      if (resGoogle) {
         console.log("resGoogle Ska SÄTTAS TILL TRUE");
         setIsGoogleAcc(true);
         setIsLoggedIn(true);
       }
-      console.log("isGoogleAcc",isGoogleAcc)
-      console.log("isLoggedIn",isLoggedIn)
-      console.log("-----------------------------------")
+      console.log("isGoogleAcc", isGoogleAcc);
     }
     checkloggedIn();
-  },[]);
+  }, []);
 
   const overlay = () => {
     let state = { click: "auto", backdrop: "blur(0px)" };
@@ -38,7 +52,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen w-full ">
+    <div>
       {displayForm ? (
         <div
           className="fixed top-1/2 left-1/2 z-10
@@ -48,6 +62,7 @@ const App = () => {
         </div>
       ) : null}
       <div
+        className="flex flex-col h-full min-h-screen w-full justify-between"
         style={{
           pointerEvents: overlay().click,
           filter: overlay().backdrop,
@@ -59,10 +74,10 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login/google/failure" element={<LoginFailure />} />
-            <Route path="/login/google/success" element={<LoginSuccess />}/>
-            <Route path="/logout/google" element={<Logout />}/>
-            {isGoogleAcc ? (
-              <Route path="/account" element={<Account />}/>
+            <Route path="/login/google/success" element={<LoginSuccess />} />
+            <Route path="/logout/google" element={<Logout />} />
+            {isGoogleAcc || isServerAcc ? (
+              <Route path="/account" element={<Account />} />
             ) : null}
           </Routes>
         </div>
