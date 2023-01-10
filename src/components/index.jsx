@@ -6,3 +6,4 @@ export { default as LoginForm } from "./LoginForm";
 export { default as History } from "./History";
 export { default as Prepaid } from "./Prepaid";
 export { default as Profile } from "./Profile";
+export { default as Balance } from "./Balance";

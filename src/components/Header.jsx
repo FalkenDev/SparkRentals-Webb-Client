@@ -16,7 +16,7 @@ const Header = ({ setDisplayForm }) => {
   };
   return (
     <div className="flex w-screen flex-row justify-between">
-      <div className="p-2">
+      <div className="p-5">
         <img src={LogoBlack} alt="React Logo" className="w-64" />
       </div>
       <nav className="text-xl font-semibold">

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Footer, Header, LoginForm } from "./components";
 import auth from "./models/auth.js";
-import { Home, LoginFailure, LoginSuccess, Logout, Account } from "./pages";
+import { Home, LoginFailure, LoginSuccess, Logout, Account, About } from "./pages";
 import { useStateContext } from "./contexts/ContextProvider";
 const App = () => {
   const [displayForm, setDisplayForm] = useState(false);
@@ -76,6 +76,7 @@ const App = () => {
             <Route path="/login/google/failure" element={<LoginFailure />} />
             <Route path="/login/google/success" element={<LoginSuccess />} />
             <Route path="/logout/google" element={<Logout />} />
+            <Route path="/about" element={<About />} />
             {isGoogleAcc || isServerAcc ? (
               <Route path="/account" element={<Account />} />
             ) : null}
