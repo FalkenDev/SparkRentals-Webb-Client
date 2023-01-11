@@ -3,9 +3,12 @@ const History = ({ userData }) => {
   const userInfo = () => {
     return userData.history.map((item, index) => {
       return (
-        <tr key={index} className="border-b text-base border-gray-400">
-          <td className="py-3 px-6">{index}</td>
-          <td className="py-3 px-6">{item.name}</td>
+        <tr key={index} className="border-b border-gray-400">
+          <td>{item.scooterName}</td>
+          <td>{item.date}</td>
+          <td>{item.totalMin}</td>
+          <td>{item.totalPrice} </td>
+          <td>{item.distance}</td>
         </tr>
       );
     });
@@ -17,21 +20,22 @@ const History = ({ userData }) => {
 
   return (
     <>
-      <h1 className="text-3xl font-semibold mb-5">History</h1>
-      <table className="w-full text-lg content-between text-center">
-        <thead
-          className=" bg-sidebarBlue text-slate-800
+      <div className="pr-32">
+        <h1 className="text-3xl font-semibold mb-5">History</h1>
+        <table className="w-full text-lg content-between text-left">
+          <thead
+            className=" bg-sidebarBlue text-slate-800
          font-semibold"
-        >
-          <tr className="flex flex-row justify-evenly">
+          >
             <th>Scooter Name</th>
             <th>Date</th>
             <th>Minutes</th>
-            <th>Price</th>
-          </tr>
-        </thead>
-        <tbody>{userInfo()}</tbody>
-      </table>
+            <th>Price (SEK)</th>
+            <th>Distance (KM)</th>
+          </thead>
+          <tbody>{userInfo()}</tbody>
+        </table>
+      </div>
     </>
   );
 };

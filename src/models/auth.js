@@ -88,6 +88,68 @@ const auth = {
     console.log("Logout", response.data);
     return response.data;
   },
+
+  deleteAcc: async function deleteAcc(id, isGoogleAcc) {
+    if (!isGoogleAcc) {
+      const tokenObj = storage.readJWT();
+      const data = {
+        user_id: id,
+        api_key: process.env.REACT_APP_WEBB_CLIENT_API,
+      };
+
+      const response = await fetch(
+        `${process.env.REACT_APP_WEBB_CLIENT_API_URL}/users`,
+        {
+          method: "DELETE",
+          body: JSON.stringify(data),
+          headers: {
+            "content-type": "application/json",
+            "x-access-token": tokenObj.token,
+          },
+        }
+      );
+      return response;
+    } else {
+      const tokenObj = storage.readToken();
+      const data = {
+        user_id: id,
+        api_key: process.env.REACT_APP_WEBB_CLIENT_API,
+      };
+      await fetch(`${process.env.REACT_APP_WEBB_CLIENT_API_URL}/users/google`, {
+        method: "DELETE",
+        body: JSON.stringify(data),
+        headers: {
+          "content-type": "application/json",
+          access_token: tokenObj.token,
+        },
+      });
+    }
+  },
+
+  registerUser: async function registerUser(newUser) {
+    const data = {
+      firstName: newUser.firstName,
+      lastName: newUser.firstName,
+      email: newUser.email,
+      password: newUser.password,
+      email: newUser.email,
+      phoneNumber: newUser.phoneNumber,
+      api_key: process.env.REACT_APP_WEBB_CLIENT_API,
+    };
+
+    const response = await fetch(
+      `${process.env.REACT_APP_WEBB_CLIENT_API_URL}/users`,
+      {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "content-type": "application/json",
+        },
+      }
+    );
+    const result = await response.json();
+    return result;
+  },
 };
 
 export default auth;

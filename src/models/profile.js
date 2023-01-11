@@ -29,5 +29,47 @@ const profile = {
       return response.json();
     }
   },
+
+  addFund: async function addFund(user_id, code, isGoogleAcc) {
+    if (!isGoogleAcc) {
+      const tokenObj = storage.readJWT();
+      const data = {
+        user_id: user_id,
+        prepaid_code: code,
+        api_key: process.env.REACT_APP_WEBB_CLIENT_API,
+      };
+      console.log(data);
+      await fetch(
+        `${process.env.REACT_APP_WEBB_CLIENT_API_URL}/users/addfund`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "content-type": "application/json",
+            "x-access-token": tokenObj.token,
+          },
+        }
+      );
+    } else {
+      const tokenObj = storage.readToken();
+      const data = {
+        user_id: user_id,
+        prepaid_code: code,
+        api_key: process.env.REACT_APP_WEBB_CLIENT_API,
+      };
+      console.log(data);
+      await fetch(
+        `${process.env.REACT_APP_WEBB_CLIENT_API_URL}/users/google/addfund`,
+        {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "content-type": "application/json",
+            access_token: tokenObj.token,
+          },
+        }
+      );
+    }
+  },
 };
 export default profile;
