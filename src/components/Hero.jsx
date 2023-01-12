@@ -3,7 +3,7 @@ import Group from "../assets/Group.png";
 const Hero = () => {
   return (
     <div>
-      <div className="flex justify-between align-middle px-44 py-5 items-center">
+      <div className="flex justify-evenly align-middle px-36 py-5 items-center">
         <div className="flex flex-col w-96">
           <h1 className="text-5xl font-bold">
             Rent Electric Scooters Easier than ever before!
@@ -22,7 +22,7 @@ const Hero = () => {
             Read More
           </button>
         </div>
-        <img src={Group} alt="React Logo" className="w-90" />
+        <img src={Group} alt="Img" className="w-90" />
       </div>
     </div>
   );
