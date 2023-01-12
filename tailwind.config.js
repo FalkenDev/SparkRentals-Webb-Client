@@ -8,6 +8,9 @@ module.exports = {
         DarkHover: "#220181",
         DarkActive: "#0b002b",
       },
+      height: {
+        1337: "870px"
+      }
     },
   },
   plugins: [],

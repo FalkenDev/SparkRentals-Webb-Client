@@ -2,9 +2,9 @@ import React from "react";
 import scooter from "../assets/scooter.png";
 const About = () => {
   return (
-    <div className="w-screen bg-violet-400 flex flex-row justify-evenly py-20">
+    <div className="w-full bg-violet-400 flex flex-row justify-evenly py-20">
       <div>
-        <img src={scooter} alt="React Logo" className="w-120" />
+        <img src={scooter} alt="scooter img" className="w-120" />
       </div>
       <div className=" w-96">
         <h1 className="text-6xl text-white font-semibold">OUR STORY</h1>
@@ -21,17 +21,11 @@ const About = () => {
           and how to go about running the program yourself.
         </p>
         <div className="flex justify-between w-64 py-5">
-          <button
+          <button onClick={(event) => (window.location.href = "https://github.com/FalkenDev/V-Team-SparkRentals")}
             className="py-2 text-DarkBlue px-2 font-semibold hover:bg-DarkBlue
           hover:text-white rounded-xl transition border-2 border-DarkBlue"
           >
             Source Code
-          </button>
-          <button
-            className="py-2 text-DarkBlue px-2 font-semibold hover:bg-DarkBlue
-            hover:text-white rounded-xl transition border-2 border-DarkBlue"
-          >
-            Mobile App
           </button>
         </div>
       </div>
