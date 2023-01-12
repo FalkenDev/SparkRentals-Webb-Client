@@ -9,7 +9,7 @@ const Logout = () => {
       navigate("/");
     });
   return (
-    <div className="w-screen">
+    <div className="w-full">
       <h1>Success, you have been loged out!</h1>
     </div>
   );
