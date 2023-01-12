@@ -15,27 +15,27 @@ const Header = ({ setDisplayForm }) => {
     navigate("/");
   };
   return (
-    <div className="flex w-screen flex-row justify-between">
+    <div className="flex w-full flex-row justify-between">
       <div className="p-5">
-        <img src={LogoBlack} alt="React Logo" className="w-64" />
+        <img src={LogoBlack} alt="Sparkrentals Logo" className="w-64" />
       </div>
-      <nav className="text-xl font-semibold">
+      <nav className="text-2xl font-semibold">
         <button
           onClick={(event) => (window.location.href = "/")}
-          className="p-1 m-2"
+          className="p-2 m-2"
         >
           Home
         </button>
         <button
           onClick={(event) => (window.location.href = "/about")}
-          className="p-1 m-2"
+          className="p-2 m-2"
         >
           About
         </button>
         {isLoggedIn ? (
           <button
             onClick={(event) => (window.location.href = "/account")}
-            className="p-1 m-2"
+            className="p-2 m-2"
           >
             Account
           </button>
