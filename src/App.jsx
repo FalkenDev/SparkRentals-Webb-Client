@@ -70,7 +70,7 @@ const App = () => {
       >
         <Header setDisplayForm={setDisplayForm} />
 
-        <div className="mb-auto">
+        <div>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login/google/failure" element={<LoginFailure />} />
